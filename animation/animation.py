@@ -7,12 +7,13 @@ WIDTH=1920
 HEIGHT=1080
 
 frames={"frame1":{
-    "bubble1":(710,750),
-    "bubble2":(1200,330),
-    "text1":(600,730),
-    "text2":(1050,320),
+    "bubble1":(720,700),
+    "bubble2":(1450,680),
+    "text1":(600,680),
+    "text2":(1405,695),
     "char1":(450,750),
-    "char2":(1500,750)
+    "char2":(1500,750),
+    #"char3":(1200,730)
 },
 "frame2":{
     "bubble1":(710,330),
@@ -83,10 +84,13 @@ for line in file:
 
     char1=cv2.imread(filepath+imgfpath+info[2],cv2.IMREAD_UNCHANGED)
     char2=cv2.imread(filepath+imgfpath+info[5],cv2.IMREAD_UNCHANGED)
+    #char3=cv2.imread(filepath+imgfpath+info[8],cv2.IMREAD_UNCHANGED)
     char1=cv2.resize(char1,(CHAR_WIDTH,CHAR_HEIGHT))
     char2=cv2.resize(char2,(CHAR_WIDTH,CHAR_HEIGHT))
+    #char3=cv2.resize(char3,(CHAR_WIDTH,CHAR_HEIGHT))
     panel=overlay_image(bg,char1,frames[frame]["char1"])
     panel=overlay_image(panel,char2,frames[frame]["char2"])
+    #panel=overlay_image(panel,char3,frames[frame]["char3"])
 
     speech_bubbles(panel,frames[frame]["bubble1"],info[4])
     multiline_text(panel,frames[frame]["text1"],info[3])
@@ -96,3 +100,4 @@ for line in file:
     cv2.imshow("test,",panel)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    
