@@ -39,7 +39,7 @@ def speech_bubbles(img,pos,triangle_pos):
 
 def multiline_text(img,pos,text):
     x,y=pos
-    maxchar=20
+    maxchar=15
     linegap=45
     words=text.split()
     lines=[]
@@ -66,25 +66,33 @@ def overlay_image(bg,char,pos):
         bg[y:y+CHAR_HEIGHT,x:x+CHAR_WIDTH,i]=char[:,:,i]*alpha + (1-alpha)*bg[y:y+CHAR_HEIGHT,x:x+CHAR_WIDTH,i]
     return bg
 
-bg=cv2.imread("/Users/Arora/Desktop/AOA-Jetlearn projects/opencv/animation/images_4_animation/white.png",cv2.IMREAD_COLOR)
-bg=cv2.resize(bg,(WIDTH,HEIGHT))
+filepath="/Users/Arora/Desktop/AOA-Jetlearn projects/opencv/animation/"
+imgfpath="images_4_animation/"
+fname="comic.txt"
 
+file=open(filepath+fname,"r")
 
+for line in file:
+    info=line.strip().split(",")
+    frame=info[1]
 
-char2=cv2.imread("/Users/Arora/Desktop/AOA-Jetlearn projects/opencv/animation/images_4_animation/Barry_Buns_S2.webp",cv2.IMREAD_UNCHANGED)
-char1=cv2.imread("/Users/Arora/Desktop/AOA-Jetlearn projects/opencv/animation/images_4_animation/kiff.png",cv2.IMREAD_UNCHANGED)
-char1=cv2.resize(char1,(CHAR_WIDTH,CHAR_HEIGHT))
-char2=cv2.resize(char2,(CHAR_WIDTH,CHAR_HEIGHT))
-panel=overlay_image(bg,char1,frames["frame1"]["char1"])
-panel=overlay_image(panel,char2,frames["frame1"]["char2"])
+    bg=cv2.imread(filepath+imgfpath+info[0],cv2.IMREAD_COLOR)
+    bg=cv2.resize(bg,(WIDTH,HEIGHT))
 
+    print(filepath+imgfpath+info[2],)
 
-speech_bubbles(panel,frames["frame1"]["bubble1"],"top-left")
-multiline_text(panel,frames["frame1"]["text1"],"Hello I am not a human being")
-speech_bubbles(panel,frames["frame1"]["bubble2"],"bottom-right")
-multiline_text(panel,frames["frame1"]["text2"],"yaasssssssssssssssss")
+    char1=cv2.imread(filepath+imgfpath+info[2],cv2.IMREAD_UNCHANGED)
+    char2=cv2.imread(filepath+imgfpath+info[5],cv2.IMREAD_UNCHANGED)
+    char1=cv2.resize(char1,(CHAR_WIDTH,CHAR_HEIGHT))
+    char2=cv2.resize(char2,(CHAR_WIDTH,CHAR_HEIGHT))
+    panel=overlay_image(bg,char1,frames[frame]["char1"])
+    panel=overlay_image(panel,char2,frames[frame]["char2"])
 
+    speech_bubbles(panel,frames[frame]["bubble1"],info[4])
+    multiline_text(panel,frames[frame]["text1"],info[3])
+    speech_bubbles(panel,frames[frame]["bubble2"],info[7])
+    multiline_text(panel,frames[frame]["text2"],info[6])
 
-cv2.imshow("test,",panel)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+    cv2.imshow("test,",panel)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
