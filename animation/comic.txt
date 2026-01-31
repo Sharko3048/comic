@@ -1,2 +1,2 @@
-parkbg.jpg,frame1,kiff.png,Barry pass the ball!,top-left,Barry_Buns_S2.webp,Okay!,bottom-right
-dirtbike.jpg,frame2,kiff.png,What is this?,bottom-left,Barry_Buns_S2.webp,Idek lets test it out,top-right
+parkbg.jpg,frame1,kiff.png,Barry pass the ball!,bottom-left,Barry_Buns_S2.webp,Okay!,bottom-right,football.jpg
+dirtbike.jpg,frame2,kiff.png,What is this?,bottom-left,Barry_Buns_S2.webp,Idek lets test it out,top-right,football.jpg
